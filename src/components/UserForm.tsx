@@ -19,10 +19,13 @@ export default function UserForm() {
 
   function handleImageChange(file: null | File) {
     const reader = new FileReader();
+    let imageUrl: string | ArrayBuffer | null;
     if (file) {
       reader.readAsDataURL(file);
       reader.onload = () => {
-        setImage(reader.result as string);
+        imageUrl = reader.result;
+        setImage(imageUrl as string);
+        formik.setFieldValue("file", imageUrl);
       };
     }
   }
@@ -34,7 +37,7 @@ export default function UserForm() {
       </div>
       <form onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
         <div>
-          <div className="mb-4 flex justify-center">
+          <div className="mb-4 flex justify-center ">
             <label htmlFor="file" className="font-bold">
               Photo +
             </label>
@@ -42,20 +45,25 @@ export default function UserForm() {
               type="file"
               name="file"
               id="file"
-              className="absolute left-[-999px] hidden"
+              // className="absolute left-[-999px] hidden"
               onChange={(event) => {
                 handleImageChange(
                   event.target.files ? event.target.files[0] : null
                 );
               }}
-              value={formik.values.file}
             />
-            {image && (
-              <div>
-                <img src={`${image}`} alt="" width="100px" height="100px" />
-              </div>
-            )}
           </div>
+          {image && (
+            <div className="flex justify-center my-2">
+              <img
+                src={image}
+                alt=""
+                width="100px"
+                height="100px"
+                className="rounded-full border border-black"
+              />
+            </div>
+          )}
           <div className="mb-4">
             <label htmlFor="name" className="mb-2 block">
               Name
