@@ -20,7 +20,7 @@ export default function UserForm() {
     },
     onSubmit: (values) => {
       dispatch(addAuth());
-      navigate("/");
+      navigate("/", { state: { ...values }, replace: true });
     },
     onReset: () => {
       setImage("");
@@ -193,12 +193,15 @@ export default function UserForm() {
           <div>
             <button
               type="submit"
-              className="bg-red-500 text-white p-2 rounded mr-8"
+              className="bg-red-500 text-white p-2 rounded mr-8 w-24"
             >
               Submit
             </button>
 
-            <button type="reset" className="bg-blue-400 text-white p-2 rounded">
+            <button
+              type="reset"
+              className="bg-blue-400 text-white p-2 rounded w-24"
+            >
               Reset
             </button>
           </div>
