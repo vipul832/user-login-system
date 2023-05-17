@@ -1,14 +1,31 @@
-import UserForm from "./components/UserForm";
+import {
+  Route,
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+} from "react-router-dom";
+import { store } from "../src/store/store";
+import RegistrationPage, { CheckAuth } from "./components/RegistrationPage";
+import DashBoardPage from "./components/DashBoardPage";
+import { Provider } from "react-redux";
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <>
+      <Route path="/" element={<CheckAuth />}>
+        <Route index element={<DashBoardPage />} />
+      </Route>
+      <Route path="/signup" element={<RegistrationPage />} />
+    </>
+  )
+);
 
 function App() {
   return (
     <>
-      <div className="flex  justify-around items-center min-h-screen mx-6">
-        <UserForm />
-        <div className="hidden sm:block">
-          <img src="./public/photo1.png" alt="" />
-        </div>
-      </div>
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
     </>
   );
 }
