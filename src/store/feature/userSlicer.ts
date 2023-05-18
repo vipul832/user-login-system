@@ -1,0 +1,36 @@
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { UserInfoFormate } from "../../utils/type";
+import { RootState } from "../store";
+
+const initialState = {
+  name: "",
+  email: "",
+  phoneNumber: "",
+  password: "",
+  file: "",
+};
+
+const userSlicer = createSlice({
+  name: "user",
+  initialState,
+  reducers: {
+    setUser: (state, action: PayloadAction<UserInfoFormate>) => {
+      state.name = action.payload.name;
+      state.email = action.payload.email;
+      state.phoneNumber = action.payload.phoneNumber;
+      state.password = action.payload.password;
+      state.file = action.payload.file;
+    },
+    removeUser: (state) => {
+      state.name = "";
+      state.email = "";
+      state.phoneNumber = "";
+      state.password = "";
+      state.file = "";
+    },
+  },
+});
+
+export const getCurrentUser = (state: RootState) => state.user;
+export const { setUser, removeUser } = userSlicer.actions;
+export default userSlicer.reducer;

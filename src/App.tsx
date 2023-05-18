@@ -4,23 +4,27 @@ import {
   createRoutesFromElements,
   RouterProvider,
 } from "react-router-dom";
-import { store } from "../src/store/store";
-import RegistrationPage, { CheckAuth } from "./components/RegistrationPage";
-import DashBoardPage from "./components/DashBoardPage";
 import { Provider } from "react-redux";
+import { store } from "../src/store/store";
+import RegistrationPage, {
+  CheckAuth,
+} from "./components/SignUp/RegistrationPage";
+import DashBoardPage from "./components/Home/DashBoardPage";
+import LoginPage from "./components/Login/LoginPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<CheckAuth />}>
-        <Route index element={<DashBoardPage />} />
+        <Route path="/home" element={<CheckAuth />}>
+          <Route index element={<DashBoardPage />} />
+        </Route>
       </Route>
-      {/* <Route path="/" element={<DashBoardPage />} /> */}
       <Route path="/signup" element={<RegistrationPage />} />
+      <Route path="/login" element={<LoginPage />} />
     </>
   )
 );
-
 function App() {
   return (
     <>

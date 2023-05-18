@@ -1,17 +1,14 @@
-import UserForm from "./UserForm";
 import { useSelector } from "react-redux";
-import { getAuthStatus } from "../store/feature/authSlicer";
 import { Navigate, Outlet } from "react-router-dom";
-import { ReactNode } from "react";
-
+import { getAuthStatus } from "../../store/feature/authSlicer";
+import UserForm from "./UserForm";
+import SideImage from "../SideImage/SideImage";
 export default function RegistrationPage() {
   return (
     <>
       <div className="flex  justify-around items-center min-h-screen mx-6">
         <UserForm />
-        <div className="hidden sm:block">
-          <img src="./public/photo1.png" alt="" />
-        </div>
+        <SideImage />
       </div>
     </>
   );
