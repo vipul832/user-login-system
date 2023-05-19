@@ -8,11 +8,13 @@ type inputProps = {
   onBlur: (event: FocusEvent) => void;
   value: string;
   placeholder: string;
+  type: string;
 };
 
 export default function InputTextField({
   name,
   title,
+  type,
   placeholder,
   onChange,
   onBlur,
@@ -22,11 +24,12 @@ export default function InputTextField({
   return (
     <>
       <div className="mb-4">
-        <label htmlFor={name} className="mb-2 block">
+        <label htmlFor={name} className="mb-2 block font-[500]">
           {title}
+          <sup className="text-red-500 text-md"> *</sup>
         </label>
         <input
-          type="text"
+          type={type}
           name={name}
           id={name}
           className="bg-orange-200 outline-none rounded p-2 border border-gray-400 w-full"

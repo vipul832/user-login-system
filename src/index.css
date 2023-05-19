@@ -1,8 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* input[type="file"] {
-  position: absolute;
-  left: -999px;
-} */
+@layer base {
+  html {
+    font-family: poppins, sans-serif;
+  }
+}

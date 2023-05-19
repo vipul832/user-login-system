@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useFormik } from "formik";
 import InputTextField from "../InputTag/InputTextField";
 import { LoginSchema } from "../../validation/LoginSchema";
@@ -41,21 +41,21 @@ const LoginForm = () => {
         dispatch(setUser(userObject.userInfo[i]));
         dispatch(addAuth());
         navigate("/home");
-        console.log("Found you");
         return;
       }
     }
   }
 
   return (
-    <div className="sm:w-[40%] w-auto">
+    <div className="sm:w-[40%] w-auto shadow-lg p-5 rounded-md">
       <div>
-        <h1 className="text-5xl font-bold my-4">Login Up</h1>
+        <h1 className="text-5xl font-bold my-4">Log In</h1>
       </div>
       <form onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
         <div>
           <div className="mb-4  ">
             <InputTextField
+              type="text"
               name="email"
               title="Email"
               placeholder="Enter your Email"
@@ -69,6 +69,7 @@ const LoginForm = () => {
               }
             />
             <InputTextField
+              type="password"
               name="password"
               title="Password"
               placeholder="Enter your Password"
@@ -96,6 +97,12 @@ const LoginForm = () => {
             >
               Reset
             </button>
+          </div>
+          <div className="mt-4 text-md">
+            Create an account{" "}
+            <Link to="/signup" className="text-blue-500">
+              SignUp Now{" "}
+            </Link>
           </div>
         </div>
       </form>

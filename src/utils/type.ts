@@ -1,3 +1,5 @@
+import { Formik } from "formik";
+
 export type UserInfoFormate = {
   name: string;
   email: string;

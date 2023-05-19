@@ -2,7 +2,8 @@ import * as Yup from "yup";
 
 export const RegistrationSchema = Yup.object().shape({
   name: Yup.string()
-    .max(15, "Must be 15 characters or less")
+    .min(15, "Must be 15 characters or More")
+    .matches(/[a-zA-Z]+/, "Invalid Name")
     .required("User name is required !"),
   email: Yup.string()
     .email("Invalid email address")
@@ -11,7 +12,11 @@ export const RegistrationSchema = Yup.object().shape({
     .matches(/^(\+91[\-\s]?)?[0]?(91)?[6789]\d{9}$/, "Invalid phone number")
     .required("Phone number is required !"),
   password: Yup.string()
-    .min(6, "Must be at least 6 characters")
+    .min(8, "Must be at least 8 characters")
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+      "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character(!@#$%&*)"
+    )
     .required("Password is required !"),
   confirmPassword: Yup.string()
     .oneOf(
