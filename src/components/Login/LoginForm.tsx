@@ -27,8 +27,6 @@ const LoginForm = () => {
           toast.error("Email not Register");
         } else if (errorStatus === "password") {
           toast.error("Incorrect Password");
-        } else {
-          toast.error("Incorrect Email and Password");
         }
       }
     },
