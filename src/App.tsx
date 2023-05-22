@@ -5,10 +5,9 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { Provider } from "react-redux";
-import { store } from "../src/store/store";
-import RegistrationPage, {
-  CheckAuth,
-} from "./components/SignUp/RegistrationPage";
+import { PersistGate } from "redux-persist/integration/react";
+import { store, persister } from "../src/store/store";
+import SignUpPage, { CheckAuth } from "./components/SignUp/SignUpPage";
 import DashBoardPage from "./components/Home/DashBoardPage";
 import LoginPage from "./components/Login/LoginPage";
 
@@ -20,7 +19,7 @@ const router = createBrowserRouter(
           <Route index element={<DashBoardPage />} />
         </Route>
       </Route>
-      <Route path="/signup" element={<RegistrationPage />} />
+      <Route path="/signup" element={<SignUpPage />} />
       <Route path="/login" element={<LoginPage />} />
     </>
   )
@@ -29,7 +28,9 @@ function App() {
   return (
     <>
       <Provider store={store}>
-        <RouterProvider router={router} />
+        <PersistGate persistor={persister}>
+          <RouterProvider router={router} />
+        </PersistGate>
       </Provider>
     </>
   );

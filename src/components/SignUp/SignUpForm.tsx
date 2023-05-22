@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { toast } from "react-hot-toast";
 import { useFormik } from "formik";
 import { RegistrationSchema } from "../../validation/RegistrationSchema";
 import InputTextField from "../InputTag/InputTextField";
 import { NewUser } from "../../utils/type";
+import bcrypt from "bcryptjs";
 
 export const values = {
   name: "",
@@ -13,6 +15,42 @@ export const values = {
   confirmPassword: "",
   file: "",
 };
+
+function CheckEmail(email: string, userData: NewUser) {
+  const userInfo = userData.userInfo;
+  for (let i in userInfo) {
+    if (userInfo[i].email === email) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function handleOnExistData(
+  name: string,
+  email: string,
+  file: string,
+  password: string,
+  phoneNumber: string,
+  userData: NewUser
+) {
+  const checkStatus = CheckEmail(email, userData);
+  if (checkStatus) {
+    toast.error("Email Already Register");
+  } else {
+    userData.userInfo.push({
+      name,
+      email,
+      file,
+      password,
+      phoneNumber,
+    });
+    localStorage.setItem("userData", JSON.stringify(userData));
+    toast.success("SignUp Successful");
+    return true;
+  }
+}
+
 export default function SignUpForm() {
   const [image, setImage] = useState<string>();
   const navigate = useNavigate();
@@ -21,20 +59,27 @@ export default function SignUpForm() {
 
     onSubmit: (values) => {
       const userData = localStorage.getItem("userData");
-      console.log(userData);
+      const { name, email, file, password, phoneNumber } = values;
+      const HashPassword = bcrypt.hashSync(password);
       if (userData) {
         const userObject: NewUser = JSON.parse(userData);
-        const { name, email, file, password, phoneNumber } = values;
-        userObject.userInfo.push({ name, email, file, password, phoneNumber });
-        localStorage.setItem("userData", JSON.stringify(userObject));
-        navigate("/login");
+        const navigateTo = handleOnExistData(
+          name,
+          email,
+          file,
+          HashPassword,
+          phoneNumber,
+          userObject
+        );
+        navigateTo ? navigate("/login") : null;
       } else {
         const data: NewUser = {
           userInfo: [],
         };
-        const { name, email, file, password, phoneNumber } = values;
+        const password = HashPassword;
         data.userInfo.push({ name, email, file, password, phoneNumber });
         localStorage.setItem("userData", JSON.stringify(data));
+        toast.success("SignUp Successful");
         navigate("/login");
       }
     },
@@ -173,9 +218,11 @@ export default function SignUpForm() {
                 onBlur={formik.handleBlur}
                 value={value}
                 errorString={errorString}
+                isMeter
               />
             );
           })}
+
           <div>
             <button
               type="submit"

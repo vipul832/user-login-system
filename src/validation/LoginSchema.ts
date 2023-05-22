@@ -5,6 +5,9 @@ export const LoginSchema = Yup.object().shape({
     .email("Invalid email address")
     .required("Email address is required !"),
   password: Yup.string()
-    .min(6, "Must be at least 6 characters")
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+      "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character(!@#$%&*)"
+    )
     .required("Password is required !"),
 });

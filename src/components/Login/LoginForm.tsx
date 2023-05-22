@@ -1,11 +1,13 @@
 import { useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import { useFormik } from "formik";
-import InputTextField from "../InputTag/InputTextField";
-import { LoginSchema } from "../../validation/LoginSchema";
+import bcrypt from "bcryptjs";
+import { UserInfo } from "../../utils/type";
 import { addAuth } from "../../store/feature/authSlicer";
 import { setUser } from "../../store/feature/userSlicer";
-import { UserInfo } from "../../utils/type";
+import InputTextField from "../InputTag/InputTextField";
+import { LoginSchema } from "../../validation/LoginSchema";
+import { toast } from "react-hot-toast";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -36,10 +38,14 @@ const LoginForm = () => {
     for (let i in userObject.userInfo) {
       if (
         userObject.userInfo[i].email === currentValue.email &&
-        userObject.userInfo[i].password === currentValue.password
+        bcrypt.compareSync(
+          currentValue.password,
+          userObject.userInfo[i].password
+        )
       ) {
         dispatch(setUser(userObject.userInfo[i]));
         dispatch(addAuth());
+        toast.success("Login Successful");
         navigate("/home");
         return;
       }

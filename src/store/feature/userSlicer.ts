@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { UserInfoFormate } from "../../utils/type";
 import { RootState } from "../store";
+import { UserInfoFormate } from "../../utils/type";
 
 const initialState = {
   name: "",
