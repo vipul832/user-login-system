@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUser, removeUser } from "../../store/feature/userSlicer";
 import { removeAuth } from "../../store/feature/authSlicer";
+import { toast } from "react-hot-toast";
 
 export default function DashBoardPage() {
   const currentUserData = useSelector(getCurrentUser);
@@ -15,6 +16,7 @@ export default function DashBoardPage() {
               className="rounded-md bg-blue-400 p-2"
               onClick={() => {
                 dispatch(removeAuth());
+                toast.success("Logout Successful");
                 dispatch(removeUser());
               }}
             >
