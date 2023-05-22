@@ -24,11 +24,11 @@ const LoginForm = () => {
         const userObject = JSON.parse(useData);
         const errorStatus = checkUser(values, userObject);
         if (errorStatus === "email") {
-          toast.error("Invalid Email Id");
+          toast.error("Email not Register");
         } else if (errorStatus === "password") {
-          toast.error("Invalid Password");
+          toast.error("Incorrect Password");
         } else {
-          toast.error("Invalid Email and Password");
+          toast.error("Incorrect Email and Password");
         }
       }
     },
