@@ -53,6 +53,7 @@ const LoginForm = () => {
           dispatch(addAuth());
           toast.success("Login Successful");
           navigate("/home");
+          userStatus="";
         } else {
           return (userStatus = "password");
         }
