@@ -22,7 +22,14 @@ const LoginForm = () => {
       const useData = localStorage.getItem("userData");
       if (useData) {
         const userObject = JSON.parse(useData);
-        checkUser(values, userObject);
+        const errorStatus = checkUser(values, userObject);
+        if (errorStatus === "email") {
+          toast.error("Invalid Email Id");
+        } else if (errorStatus === "password") {
+          toast.error("Invalid Password");
+        } else {
+          toast.error("Invalid Email and Password");
+        }
       }
     },
     validationSchema: LoginSchema,
@@ -35,21 +42,25 @@ const LoginForm = () => {
     },
     userObject: UserInfo
   ) {
+    let userStatus = "email";
     for (let i in userObject.userInfo) {
-      if (
-        userObject.userInfo[i].email === currentValue.email &&
-        bcrypt.compareSync(
-          currentValue.password,
-          userObject.userInfo[i].password
-        )
-      ) {
-        dispatch(setUser(userObject.userInfo[i]));
-        dispatch(addAuth());
-        toast.success("Login Successful");
-        navigate("/home");
-        return;
+      if (userObject.userInfo[i].email === currentValue.email) {
+        if (
+          bcrypt.compareSync(
+            currentValue.password,
+            userObject.userInfo[i].password
+          )
+        ) {
+          dispatch(setUser(userObject.userInfo[i]));
+          dispatch(addAuth());
+          toast.success("Login Successful");
+          navigate("/home");
+        } else {
+          return (userStatus = "password");
+        }
       }
     }
+    return userStatus;
   }
 
   return (
