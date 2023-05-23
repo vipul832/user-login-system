@@ -54,7 +54,7 @@ const LoginForm = () => {
           dispatch(setUser(userObject.userInfo[i]));
           dispatch(addAuth());
           toast.success("Login Successful");
-          navigate("/home");
+          navigate("/");
           userStatus = "";
         } else {
           return (userStatus = "password");

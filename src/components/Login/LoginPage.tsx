@@ -7,7 +7,7 @@ import { Navigate } from "react-router-dom";
 export default function LoginPage() {
   const { Auth } = useSelector(getAuthStatus);
   if (Auth) {
-    return <Navigate to="/home" />;
+    return <Navigate to="/" />;
   }
   return (
     <>

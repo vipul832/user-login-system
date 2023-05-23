@@ -6,7 +6,7 @@ import SideImage from "../SideImage/SideImage";
 export default function SignUpPage() {
   const { Auth } = useSelector(getAuthStatus);
   if (Auth) {
-    return <Navigate to="/home" />;
+    return <Navigate to="/" />;
   }
   return (
     <>
@@ -20,6 +20,6 @@ export default function SignUpPage() {
 
 export function CheckAuth() {
   const { Auth } = useSelector(getAuthStatus);
-  console.log(Auth);
+
   return Auth ? <Outlet /> : <Navigate to={"/signup"} />;
 }
