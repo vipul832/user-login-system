@@ -238,7 +238,7 @@ export default function SignUpForm() {
               type="submit"
               className="bg-red-500 text-white p-2 rounded mr-8 w-24"
             >
-              Submit
+              SignUp
             </button>
 
             <button
