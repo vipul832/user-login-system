@@ -11,11 +11,9 @@ export const AuthSlicer = createSlice({
   reducers: {
     addAuth: (state) => {
       state.Auth = true;
-      console.log(state.Auth);
     },
     removeAuth: (state) => {
       state.Auth = false;
-      console.log(state.Auth);
     },
   },
 });
