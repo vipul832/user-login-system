@@ -4,10 +4,14 @@ import { toast } from "react-hot-toast";
 import { useFormik } from "formik";
 import { RegistrationSchema } from "../../validation/RegistrationSchema";
 import InputTextField from "../InputTag/InputTextField";
-import { NewUser } from "../../utils/type";
+import {
+  UserDataList,
+  UserInfoFormate,
+  inputFieldListValues,
+} from "../../utils/type";
 import bcrypt from "bcryptjs";
 
-export const values = {
+export const values: UserInfoFormate = {
   name: "",
   email: "",
   phoneNumber: "",
@@ -16,10 +20,10 @@ export const values = {
   file: "",
 };
 
-function CheckEmail(email: string, userData: NewUser) {
-  const userInfo = userData.userInfo;
-  for (let i in userInfo) {
-    if (userInfo[i].email === email) {
+function CheckEmail(email: string, userData: UserDataList) {
+  const userList = userData.userList;
+  for (let i in userList) {
+    if (userList[i].email === email) {
       return true;
     }
   }
@@ -32,13 +36,13 @@ function handleOnExistData(
   file: string,
   password: string,
   phoneNumber: string,
-  userData: NewUser
+  userData: UserDataList
 ) {
-  const checkStatus = CheckEmail(email, userData);
+  const checkStatus: boolean = CheckEmail(email, userData);
   if (checkStatus) {
     toast.error("Email Already Register");
   } else {
-    userData.userInfo.push({
+    userData.userList.push({
       name,
       email,
       file,
@@ -62,23 +66,29 @@ export default function SignUpForm() {
       const { name, email, file, password, phoneNumber } = values;
       const HashPassword = bcrypt.hashSync(password);
       if (userData) {
-        const userObject: NewUser = JSON.parse(userData);
+        const userDataObject: UserDataList = JSON.parse(userData);
         const navigateTo = handleOnExistData(
           name,
           email,
           file,
           HashPassword,
           phoneNumber,
-          userObject
+          userDataObject
         );
         navigateTo ? navigate("/login") : null;
       } else {
-        const data: NewUser = {
-          userInfo: [],
+        const userDataObject: UserDataList = {
+          userList: [],
         };
         const password = HashPassword;
-        data.userInfo.push({ name, email, file, password, phoneNumber });
-        localStorage.setItem("userData", JSON.stringify(data));
+        userDataObject.userList.push({
+          name,
+          email,
+          file,
+          password,
+          phoneNumber,
+        });
+        localStorage.setItem("userData", JSON.stringify(userDataObject));
         toast.success("SignUp Successful");
         navigate("/login");
       }
@@ -113,7 +123,7 @@ export default function SignUpForm() {
     inputTag.value = "";
   }
 
-  const InPutFeildValue = [
+  const inputFeildValue: inputFieldListValues = [
     {
       name: "name",
       type: "text",
@@ -205,7 +215,7 @@ export default function SignUpForm() {
             </div>
           ) : null}
 
-          {InPutFeildValue.map((obj, index) => {
+          {inputFeildValue.map((obj, index) => {
             const { name, title, value, placeHolder, errorString, type } = obj;
             return (
               <InputTextField

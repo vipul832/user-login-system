@@ -14,7 +14,10 @@ const userSlicer = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<UserInfoFormate>) => {
+    setUser: (
+      state,
+      action: PayloadAction<Omit<UserInfoFormate, "confirmPassword">>
+    ) => {
       state.name = action.payload.name;
       state.email = action.payload.email;
       state.phoneNumber = action.payload.phoneNumber;

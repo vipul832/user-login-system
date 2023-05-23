@@ -16,8 +16,6 @@ const router = createBrowserRouter(
     <>
       <Route path="/" element={<CheckAuth />}>
         <Route index element={<DashBoardPage />} />
-        {/* <Route index element={<DashBoardPage />} /> */}
-        {/* </Route> */}
       </Route>
       <Route path="/signup" element={<SignUpPage />} />
       <Route path="/login" element={<LoginPage />} />

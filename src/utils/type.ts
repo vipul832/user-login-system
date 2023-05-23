@@ -7,10 +7,15 @@ export type UserInfoFormate = {
   file: string;
 };
 
-export type UserInfo = {
-  userInfo: UserInfoFormate[];
+export type UserDataList = {
+  userList: Omit<UserInfoFormate, "confirmPassword">[];
 };
 
-export type NewUser = {
-  userInfo: Omit<UserInfoFormate, "confirmPassword">[];
-};
+export type inputFieldList{
+  name: string;
+  type: string;
+  title: string;
+  placeHolder: string;
+  value: string;
+  errorString: string | null;
+}[]

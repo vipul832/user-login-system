@@ -1,6 +1,4 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import authReducer from "./feature/authSlicer";
-import userReducer from "./feature/userSlicer";
 import {
   persistStore,
   persistReducer,
@@ -12,6 +10,8 @@ import {
   REGISTER,
 } from "redux-persist";
 import localStorage from "redux-persist/es/storage";
+import authReducer from "./feature/authSlicer";
+import userReducer from "./feature/userSlicer";
 
 const persistConfig = {
   key: "root",

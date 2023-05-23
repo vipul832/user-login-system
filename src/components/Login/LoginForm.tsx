@@ -2,12 +2,12 @@ import { useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import { useFormik } from "formik";
 import bcrypt from "bcryptjs";
-import { UserInfo } from "../../utils/type";
+import { toast } from "react-hot-toast";
+import { UserDataList } from "../../utils/type";
 import { addAuth } from "../../store/feature/authSlicer";
 import { setUser } from "../../store/feature/userSlicer";
 import InputTextField from "../InputTag/InputTextField";
 import { LoginSchema } from "../../validation/LoginSchema";
-import { toast } from "react-hot-toast";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -21,8 +21,8 @@ const LoginForm = () => {
     onSubmit: (values) => {
       const useData = localStorage.getItem("userData");
       if (useData) {
-        const userObject = JSON.parse(useData);
-        const errorStatus = checkUser(values, userObject);
+        const userDataObject = JSON.parse(useData);
+        const errorStatus = checkUser(values, userDataObject);
         if (errorStatus === "email") {
           toast.error("Email not Register");
         } else if (errorStatus === "password") {
@@ -40,18 +40,18 @@ const LoginForm = () => {
       email: string;
       password: string;
     },
-    userObject: UserInfo
+    userDataObject: UserDataList
   ) {
     let userStatus = "email";
-    for (let i in userObject.userInfo) {
-      if (userObject.userInfo[i].email === currentValue.email) {
+    for (let i in userDataObject.userList) {
+      if (userDataObject.userList[i].email === currentValue.email) {
         if (
           bcrypt.compareSync(
             currentValue.password,
-            userObject.userInfo[i].password
+            userDataObject.userList[i].password
           )
         ) {
-          dispatch(setUser(userObject.userInfo[i]));
+          dispatch(setUser(userDataObject.userList[i]));
           dispatch(addAuth());
           toast.success("Login Successful");
           navigate("/");

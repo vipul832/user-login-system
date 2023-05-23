@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-hot-toast";
 import { getCurrentUser, removeUser } from "../../store/feature/userSlicer";
 import { removeAuth } from "../../store/feature/authSlicer";
-import { toast } from "react-hot-toast";
 
 export default function DashBoardPage() {
   const currentUserData = useSelector(getCurrentUser);

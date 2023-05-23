@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
+import { getAuthStatus } from "../../store/feature/authSlicer";
 import LoginForm from "./LoginForm";
 import SideImage from "../SideImage/SideImage";
-import { getAuthStatus } from "../../store/feature/authSlicer";
-import { Navigate } from "react-router-dom";
 
 export default function LoginPage() {
   const { Auth } = useSelector(getAuthStatus);

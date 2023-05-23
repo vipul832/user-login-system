@@ -3,6 +3,7 @@ import { Navigate, Outlet } from "react-router-dom";
 import { getAuthStatus } from "../../store/feature/authSlicer";
 import SignUpForm from "./SignUpForm";
 import SideImage from "../SideImage/SideImage";
+
 export default function SignUpPage() {
   const { Auth } = useSelector(getAuthStatus);
   if (Auth) {
