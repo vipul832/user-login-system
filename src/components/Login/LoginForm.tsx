@@ -29,7 +29,7 @@ const LoginForm = () => {
           toast.error("Incorrect Password");
         }
       } else {
-        toast.error("User Register");
+        toast.error("User not Register");
       }
     },
     validationSchema: LoginSchema,
