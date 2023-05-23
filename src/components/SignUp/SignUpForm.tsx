@@ -64,7 +64,7 @@ export default function SignUpForm() {
     onSubmit: (values) => {
       const userData = localStorage.getItem("userData");
       const { name, email, file, password, phoneNumber } = values;
-      const HashPassword = bcrypt.hashSync(password);
+      const HashPassword: string = bcrypt.hashSync(password);
       if (userData) {
         const userDataObject: UserDataList = JSON.parse(userData);
         const navigateTo = handleOnExistData(
