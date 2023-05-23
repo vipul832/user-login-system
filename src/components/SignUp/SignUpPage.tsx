@@ -5,6 +5,11 @@ import SignUpForm from "./SignUpForm";
 import SideImage from "../SideImage/SideImage";
 export default function SignUpPage() {
   const { Auth } = useSelector(getAuthStatus);
+  const userData = localStorage.getItem("persist:persist-key");
+  if (userData) {
+    const userAuthStatus = JSON.parse(userData);
+    console.log(userAuthStatus.auth === '{"Auth":false}');
+  }
   if (Auth) {
     return <Navigate to="/home" />;
   }

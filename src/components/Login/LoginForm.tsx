@@ -28,6 +28,8 @@ const LoginForm = () => {
         } else if (errorStatus === "password") {
           toast.error("Incorrect Password");
         }
+      } else {
+        toast.error("User Register");
       }
     },
     validationSchema: LoginSchema,
@@ -53,7 +55,7 @@ const LoginForm = () => {
           dispatch(addAuth());
           toast.success("Login Successful");
           navigate("/home");
-          userStatus="";
+          userStatus = "";
         } else {
           return (userStatus = "password");
         }
