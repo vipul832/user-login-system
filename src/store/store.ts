@@ -2,11 +2,11 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import authReducer from "./feature/authSlicer";
 import userReducer from "./feature/userSlicer";
 import { persistStore, persistReducer } from "redux-persist";
-import sessionStorage from "redux-persist/es/storage/session";
+import localStorage from "redux-persist/es/storage";
 
 const persistConfig = {
   key: "persist-key",
-  storage: sessionStorage,
+  storage: localStorage,
 };
 
 const rootReducer = combineReducers({
