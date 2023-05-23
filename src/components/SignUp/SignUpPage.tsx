@@ -20,5 +20,6 @@ export default function SignUpPage() {
 
 export function CheckAuth() {
   const { Auth } = useSelector(getAuthStatus);
+  console.log(Auth);
   return Auth ? <Outlet /> : <Navigate to={"/signup"} />;
 }
