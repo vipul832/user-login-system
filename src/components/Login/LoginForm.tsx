@@ -21,7 +21,7 @@ const LoginForm = () => {
     onSubmit: (values) => {
       const useData = localStorage.getItem("userData");
       if (useData) {
-        const userDataObject = JSON.parse(useData);
+        const userDataObject: UserDataList = JSON.parse(useData);
         const errorStatus = checkUser(values, userDataObject);
         if (errorStatus === "email") {
           toast.error("Email not Register");
