@@ -25,6 +25,27 @@ Here below I mesion all task we have to complete in this practical:
 - **Security** : Your password are converted in to hash and then it is store in LocalStorage.
 - **Alert** : you will get all the activity are Alert to you on top like (SignUp successful,logIn and if any you is already register with same email or not)
 
+## Local SetUp
+To clone this project flow below step.
+- **Step 1:** To Clone this project Click on Top Right button Name ```Code``` click on that and copy the url.
+- **Step 2:** Open Terminal or Powershell Copy the Command mention below.
+  ```
+  git clone git@github.com:vipulc8/user-login-system.git
+  ```
+- **Step 3:** Above command create a file and get all the code from github and generate an copy of that project which later one you can make changes using any Editor. 
+   ```
+   cd user-login-system
+   ```
+ - **Step 4:** After Running above code it will take you to that folder.To run this Practical you have to first install ```yarn``` or  if your have node pre install then user ```npm``` run following command to install all the dependency.
+   ```
+   npm install
+   ```
+   Then is will start installing all the required file for project in you local system.
+   
+ - **Step 5:** After install the dependency now use command ```npm run dev``` or if you are using **yarn** use ```yarn dev``` this command generate a url from which you can see the project in you browser.
+
+
+
 ## ScreenShot
 - **SignUp**
 
